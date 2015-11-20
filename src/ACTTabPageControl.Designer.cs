@@ -69,11 +69,18 @@
             this.labelLoadedTimeline = new System.Windows.Forms.Label();
             this.labelLoadedTimelineLabel = new System.Windows.Forms.Label();
             this.trackBar = new System.Windows.Forms.TrackBar();
-            this.checkBoxAutoloadAfterChangeZone = new System.Windows.Forms.CheckBox();
             this.checkBoxMoveOverlayByDrag = new System.Windows.Forms.CheckBox();
             this.groupBoxEnvironment.SuspendLayout();
             this.groupBoxTimelines.SuspendLayout();
             this.groupBoxOverlay.SuspendLayout();
+            this.groupBoxAutoLoader = new System.Windows.Forms.GroupBox();
+            this.labelFindFilename = new System.Windows.Forms.Label();
+            this.textBoxZonename = new System.Windows.Forms.TextBox();
+            this.labeltxt = new System.Windows.Forms.Label();
+            this.checkBoxAutoloadAfterChangeZone = new System.Windows.Forms.CheckBox();
+            this.checkBoxAutoShow = new System.Windows.Forms.CheckBox();
+            this.checkBoxAutoHide = new System.Windows.Forms.CheckBox();
+            this.checkBoxResetTimelineCombatEnd = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarOpacity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udOverlayY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udBarWidth)).BeginInit();
@@ -82,6 +89,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.udOverlayX)).BeginInit();
             this.groupBoxTracker.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
+            this.groupBoxAutoLoader.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonResourceDirSelect
@@ -113,7 +121,6 @@
             // 
             // groupBoxEnvironment
             // 
-            this.groupBoxEnvironment.Controls.Add(this.checkBoxAutoloadAfterChangeZone);
             this.groupBoxEnvironment.Controls.Add(this.labelResourceDirStatus);
             this.groupBoxEnvironment.Controls.Add(this.textBoxResourceDir);
             this.groupBoxEnvironment.Controls.Add(this.checkBoxPlaySoundByACT);
@@ -589,17 +596,6 @@
             this.trackBar.TickFrequency = 30;
             this.trackBar.Scroll += new System.EventHandler(this.trackbar_Scroll);
             // 
-            // checkBoxAutoloadAfterChangeZone
-            // 
-            this.checkBoxAutoloadAfterChangeZone.AutoSize = true;
-            this.checkBoxAutoloadAfterChangeZone.Location = new System.Drawing.Point(141, 105);
-            this.checkBoxAutoloadAfterChangeZone.Name = "checkBoxAutoloadAfterChangeZone";
-            this.checkBoxAutoloadAfterChangeZone.Size = new System.Drawing.Size(164, 16);
-            this.checkBoxAutoloadAfterChangeZone.TabIndex = 4;
-            this.checkBoxAutoloadAfterChangeZone.Text = "Autoload after change zone";
-            this.checkBoxAutoloadAfterChangeZone.UseVisualStyleBackColor = true;
-            this.checkBoxAutoloadAfterChangeZone.CheckedChanged += new System.EventHandler(this.checkBoxAutoloadAfterChangeZone_CheckedChanged);
-            // 
             // checkBoxMoveOverlayByDrag
             // 
             this.checkBoxMoveOverlayByDrag.AutoSize = true;
@@ -613,6 +609,92 @@
             this.checkBoxMoveOverlayByDrag.UseVisualStyleBackColor = true;
             this.checkBoxMoveOverlayByDrag.CheckedChanged += new System.EventHandler(this.checkBoxMoveOverlayByDrag_CheckedChanged);
             // 
+            // groupBoxAutoLoader
+            // 
+            this.groupBoxAutoLoader.Controls.Add(this.checkBoxResetTimelineCombatEnd);
+            this.groupBoxAutoLoader.Controls.Add(this.textBoxZonename);
+            this.groupBoxAutoLoader.Controls.Add(this.labeltxt);
+            this.groupBoxAutoLoader.Controls.Add(this.labelFindFilename);
+            this.groupBoxAutoLoader.Controls.Add(this.checkBoxAutoHide);
+            this.groupBoxAutoLoader.Controls.Add(this.checkBoxAutoloadAfterChangeZone);
+            this.groupBoxAutoLoader.Controls.Add(this.checkBoxAutoShow);
+            this.groupBoxAutoLoader.Location = new System.Drawing.Point(491, 11);
+            this.groupBoxAutoLoader.Name = "groupBoxAutoLoader";
+            this.groupBoxAutoLoader.Size = new System.Drawing.Size(278, 143);
+            this.groupBoxAutoLoader.TabIndex = 7;
+            this.groupBoxAutoLoader.TabStop = false;
+            this.groupBoxAutoLoader.Text = "Autoload";
+            // 
+            // labelFindFilename
+            // 
+            this.labelFindFilename.AutoSize = true;
+            this.labelFindFilename.Location = new System.Drawing.Point(7, 18);
+            this.labelFindFilename.Name = "labelFindFilename";
+            this.labelFindFilename.Size = new System.Drawing.Size(77, 12);
+            this.labelFindFilename.TabIndex = 8;
+            this.labelFindFilename.Text = "Find Filename";
+            // 
+            // textBoxZonename
+            // 
+            this.textBoxZonename.Location = new System.Drawing.Point(6, 31);
+            this.textBoxZonename.Name = "textBoxZonename";
+            this.textBoxZonename.ReadOnly = true;
+            this.textBoxZonename.Size = new System.Drawing.Size(229, 19);
+            this.textBoxZonename.TabIndex = 7;
+            // 
+            // labeltxt
+            // 
+            this.labeltxt.AutoSize = true;
+            this.labeltxt.Location = new System.Drawing.Point(241, 34);
+            this.labeltxt.Name = "labeltxt";
+            this.labeltxt.Size = new System.Drawing.Size(21, 12);
+            this.labeltxt.TabIndex = 9;
+            this.labeltxt.Text = ".txt";
+            // 
+            // checkBoxAutoloadAfterChangeZone
+            // 
+            this.checkBoxAutoloadAfterChangeZone.AutoSize = true;
+            this.checkBoxAutoloadAfterChangeZone.Location = new System.Drawing.Point(9, 54);
+            this.checkBoxAutoloadAfterChangeZone.Name = "checkBoxAutoloadAfterChangeZone";
+            this.checkBoxAutoloadAfterChangeZone.Size = new System.Drawing.Size(164, 16);
+            this.checkBoxAutoloadAfterChangeZone.TabIndex = 4;
+            this.checkBoxAutoloadAfterChangeZone.Text = "Autoload after change zone";
+            this.checkBoxAutoloadAfterChangeZone.UseVisualStyleBackColor = true;
+            this.checkBoxAutoloadAfterChangeZone.CheckedChanged += new System.EventHandler(this.checkBoxAutoloadAfterChangeZone_CheckedChanged);
+            // 
+            // checkBoxAutoShow
+            // 
+            this.checkBoxAutoShow.AutoSize = true;
+            this.checkBoxAutoShow.Location = new System.Drawing.Point(9, 75);
+            this.checkBoxAutoShow.Name = "checkBoxAutoShow";
+            this.checkBoxAutoShow.Size = new System.Drawing.Size(122, 16);
+            this.checkBoxAutoShow.TabIndex = 5;
+            this.checkBoxAutoShow.Text = "Auto show timeline";
+            this.checkBoxAutoShow.UseVisualStyleBackColor = true;
+            this.checkBoxAutoShow.CheckedChanged += new System.EventHandler(this.checkBoxAutoShow_CheckedChanged);
+            // 
+            // checkBoxAutoHide
+            // 
+            this.checkBoxAutoHide.AutoSize = true;
+            this.checkBoxAutoHide.Location = new System.Drawing.Point(9, 95);
+            this.checkBoxAutoHide.Name = "checkBoxAutoHide";
+            this.checkBoxAutoHide.Size = new System.Drawing.Size(117, 16);
+            this.checkBoxAutoHide.TabIndex = 6;
+            this.checkBoxAutoHide.Text = "Auto hide timeline";
+            this.checkBoxAutoHide.UseVisualStyleBackColor = true;
+            this.checkBoxAutoHide.CheckedChanged += new System.EventHandler(this.checkBoxAutoHide_CheckedChanged);
+            // 
+            // checkBoxResetTimelineCombatEnd
+            // 
+            this.checkBoxResetTimelineCombatEnd.AutoSize = true;
+            this.checkBoxResetTimelineCombatEnd.Location = new System.Drawing.Point(9, 117);
+            this.checkBoxResetTimelineCombatEnd.Name = "checkBoxResetTimelineCombatEnd";
+            this.checkBoxResetTimelineCombatEnd.Size = new System.Drawing.Size(178, 16);
+            this.checkBoxResetTimelineCombatEnd.TabIndex = 10;
+            this.checkBoxResetTimelineCombatEnd.Text = "Reset Timeline at combat end";
+            this.checkBoxResetTimelineCombatEnd.UseVisualStyleBackColor = true;
+            this.checkBoxResetTimelineCombatEnd.CheckedChanged += new System.EventHandler(this.checkBoxResetTimelineCombatEnd_CheckedChanged);
+            // 
             // ACTTabPageControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -621,8 +703,9 @@
             this.Controls.Add(this.groupBoxOverlay);
             this.Controls.Add(this.groupBoxTimelines);
             this.Controls.Add(this.groupBoxEnvironment);
+            this.Controls.Add(this.groupBoxAutoLoader);
             this.Name = "ACTTabPageControl";
-            this.Size = new System.Drawing.Size(500, 674);
+            this.Size = new System.Drawing.Size(784, 674);
             this.groupBoxEnvironment.ResumeLayout(false);
             this.groupBoxEnvironment.PerformLayout();
             this.groupBoxTimelines.ResumeLayout(false);
@@ -637,6 +720,8 @@
             this.groupBoxTracker.ResumeLayout(false);
             this.groupBoxTracker.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
+            this.groupBoxAutoLoader.ResumeLayout(false);
+            this.groupBoxAutoLoader.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -685,6 +770,13 @@
         private System.Windows.Forms.Label labelOpacity;
         private System.Windows.Forms.Label labelCurrOpacity;
         private System.Windows.Forms.CheckBox checkBoxMoveOverlayByDrag;
+        private System.Windows.Forms.GroupBox groupBoxAutoLoader;
+        private System.Windows.Forms.Label labelFindFilename;
+        private System.Windows.Forms.TextBox textBoxZonename;
+        private System.Windows.Forms.Label labeltxt;
         private System.Windows.Forms.CheckBox checkBoxAutoloadAfterChangeZone;
+        private System.Windows.Forms.CheckBox checkBoxAutoShow;
+        private System.Windows.Forms.CheckBox checkBoxAutoHide;
+        private System.Windows.Forms.CheckBox checkBoxResetTimelineCombatEnd;
     }
 }

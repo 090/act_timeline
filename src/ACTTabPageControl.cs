@@ -32,6 +32,9 @@ namespace ACTTimeline
             settings.AddControlSetting("ShowOverlayButtons", checkBoxShowOverlayButtons);
             settings.AddControlSetting("PlaySoundByACT", checkBoxPlaySoundByACT);
             settings.AddControlSetting("Autoload", checkBoxAutoloadAfterChangeZone);
+            settings.AddControlSetting("AutoShow", checkBoxAutoShow);
+            settings.AddControlSetting("AutoHide", checkBoxAutoHide);
+            settings.AddControlSetting("ResetTimelineAtCombatEnd", checkBoxResetTimelineCombatEnd);
 
             plugin.TimelineView.Move += TimelineView_Move;
             plugin.TimelineView.TimelineFontChanged += TimelineView_TimelineFontChanged;
@@ -40,6 +43,7 @@ namespace ACTTimeline
             plugin.Controller.CurrentTimeUpdate += Controller_CurrentTimeUpdate;
             plugin.Controller.TimelineUpdate += Controller_TimelineUpdate;
             plugin.Controller.PausedUpdate += Controller_PausedUpdate;
+            plugin.TimelineAutoLoader.ZoneChange += Autoloader_ZoneChange;
             TimelineView_TimelineFontChanged(this, null);
             TimelineView_ColumnWidthChanged(this, null);
             TimelineView_OpacityChanged(this, null);
@@ -275,6 +279,26 @@ namespace ACTTimeline
         private void checkBoxAutoloadAfterChangeZone_CheckedChanged(object sender, EventArgs e)
         {
             plugin.TimelineAutoLoader.Autoload = checkBoxAutoloadAfterChangeZone.Checked;
+        }
+
+        private void checkBoxAutoShow_CheckedChanged(object sender, EventArgs e)
+        {
+            plugin.TimelineAutoLoader.AutoShow = checkBoxAutoShow.Checked;
+        }
+
+        private void checkBoxAutoHide_CheckedChanged(object sender, EventArgs e)
+        {
+            plugin.TimelineAutoLoader.AutoHide = checkBoxAutoHide.Checked;
+        }
+        private void Autoloader_ZoneChange(object sender, EventArgs e)
+        {
+            textBoxZonename.Text = plugin.TimelineAutoLoader.FindFilename;
+        }
+
+        private void checkBoxResetTimelineCombatEnd_CheckedChanged(object sender, EventArgs e)
+        {
+            Globals.ResetTimelineCombatEnd = checkBoxResetTimelineCombatEnd.Checked;
+
         }
     }
 }

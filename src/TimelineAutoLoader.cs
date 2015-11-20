@@ -10,15 +10,17 @@ namespace ACTTimeline
     public class TimelineAutoLoader
     {
         private string m_currentzone = string.Empty;
-
+        private bool m_autoload = false;
         public bool Autoload { get; set; }
-
-
+        public bool AutoShow { get; set; }
+        public bool AutoHide { get; set; }
+        public string FindFilename { get; set; }
+        public event EventHandler ZoneChange;
         private Timer timer;
-        private TimelineController controller;
-        public TimelineAutoLoader(TimelineController _controller)
+        private ACTPlugin plugin;
+        public TimelineAutoLoader(ACTPlugin _plugin)
         {
-            controller = _controller;
+            plugin = _plugin;
             timer = new Timer();
             timer.Interval = 5000;
             timer.Tick += timer_CheckCurrentZone;
@@ -33,11 +35,30 @@ namespace ACTTimeline
                 return;
             if (m_currentzone != zonename)
             {
-                var file = String.Format("{0}/{1}.txt", Globals.TimelineTxtsRoot, zonename);
+                var file = zonename;
+                foreach (char c in System.IO.Path.GetInvalidFileNameChars())
+                {
+                    file = file.Replace(c, '_');
+                }
+                FindFilename = file;
+
+                if (ZoneChange != null)
+                    ZoneChange(this, EventArgs.Empty);
+
+                file = String.Format("{0}/{1}.txt", Globals.TimelineTxtsRoot, FindFilename);
                 if (System.IO.File.Exists(file))
                 {
-                    controller.Paused = true;
-                    controller.TimelineTxtFilePath = file;
+                    plugin.Controller.Paused = true;
+                    plugin.Controller.TimelineTxtFilePath = file;
+                    m_autoload = true;
+                    if (AutoShow)
+                        plugin.TimelineView.Show();
+                }
+                else
+                {
+                    if (m_autoload && AutoHide)
+                        plugin.TimelineView.Hide();
+                    m_autoload = false;
                 }
                 m_currentzone = zonename;
             }

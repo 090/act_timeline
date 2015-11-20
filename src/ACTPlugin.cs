@@ -89,7 +89,7 @@ namespace ACTTimeline
                 TimelineView.Show();
                 TimelineView.DoubleClick += TimelineView_DoubleClick;
 
-                TimelineAutoLoader = new TimelineAutoLoader(Controller);
+                TimelineAutoLoader = new TimelineAutoLoader(this);
                 TimelineAutoLoader.Start();
 
                 Settings = new PluginSettings(this);
@@ -98,6 +98,8 @@ namespace ACTTimeline
                 Settings.AddIntSetting("TextWidth");
                 Settings.AddIntSetting("BarWidth");
                 Settings.AddIntSetting("OpacityPercentage");
+
+                ActGlobals.oFormActMain.OnCombatEnd += CombatEnd;
 
                 SetupTab();
                 InjectButton();
@@ -112,6 +114,15 @@ namespace ACTTimeline
             {
                 if (StatusText != null)
                     StatusText.Text = "Plugin Init Failed: "+e.Message;
+            }
+        }
+
+        void CombatEnd(bool isImport, CombatToggleEventArgs encounterInfo)
+        {
+            if (!isImport && Globals.ResetTimelineCombatEnd)
+            {
+                Controller.Paused = true;
+                Controller.CurrentTime = 0;
             }
         }
 
@@ -206,6 +217,7 @@ namespace ACTTimeline
             if (Controller != null)
                 Controller.Stop();
 
+            ActGlobals.oFormActMain.OnCombatEnd -= CombatEnd;
             ActGlobals.oFormActMain.UpdateCheckClicked -= CheckForUpdate;
 
             if (StatusText != null)

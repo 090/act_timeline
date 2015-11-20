@@ -80,5 +80,7 @@ namespace ACTTimeline
             client.Encoding = System.Text.Encoding.UTF8;
             return client.DownloadString(url);
         }
+
+        static public bool ResetTimelineCombatEnd;
     }
 }
